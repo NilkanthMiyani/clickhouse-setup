@@ -1,0 +1,41 @@
+## ClickHouse - Bitnami chart values
+## Single node: 1 shard x 1 replica, no Keeper, no replication.
+
+global:
+  security:
+    allowInsecureImages: true
+
+image:
+  registry: docker.io
+  repository: bitnamilegacy/clickhouse
+
+shards: 1
+replicaCount: 1
+
+keeper:
+  enabled: false
+
+## note: there is no top-level `zookeeper` key in this chart. The only zookeeper
+## option is `externalZookeeper.servers`, which stays empty for a single node.
+
+auth:
+  username: default
+  existingSecret: clickhouse-auth
+  existingSecretKey: admin-password
+
+persistence:
+  enabled: true
+  storageClass: standard-sc
+  size: 50Gi
+
+resourcesPre  set: "none"
+resources:
+  requests:
+    cpu: 500m
+    memory: 1Gi
+  limits:
+    cpu: 1500m
+    memory: 3Gi
+
+service:
+  type: ClusterIP
