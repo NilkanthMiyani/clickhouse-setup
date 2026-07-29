@@ -28,7 +28,7 @@ persistence:
   storageClass: standard-sc
   size: 50Gi
 
-resourcesPre  set: "none"
+resourcesPreset: "none"
 resources:
   requests:
     cpu: 500m
